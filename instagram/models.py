@@ -7,12 +7,18 @@ class Profile(models.Model):
     bio=models.CharField(max_length=100)
     user=models.ForeignKey(User, on_delete=models.CASCADE )
 
+    def __str__(self):
+        return self.user
+
 
 class Photos(models.Model):
     image=models.ImageField(upload_to='articles/')
     image_name=models.CharField(blank=True, max_length=50)
     image_caption=models.CharField(blank=True,max_length=100)
-    profile=models.ForeignKey(Profile)
+    user=models.ForeignKey(User, on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.profile
    
 
     @classmethod
