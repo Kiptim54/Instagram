@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 
 class Profile(models.Model):
     profile_photo=models.ImageField(upload_to='article/')

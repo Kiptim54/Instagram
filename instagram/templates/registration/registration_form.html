@@ -1,5 +1,4 @@
-{% extends 'registration/base.html' %}
-{% load bootstrap3 %}
+{%extends "registration/base.html"%} {% load bootstrap3 %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -14,19 +13,20 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <form action="accounts/register/" method="post">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
+                    <form  action="/accounts/register/" method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-sm" value="Sign up">  
+                        <input type="submit" class="btn btn-primary btn-sm" value="Sign up"> 
+                     </div> 
                     <input type="hidden" name="next" value="{{next}}">     
-                    </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+   </div>
+   </div>
+
 
 
 
