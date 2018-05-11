@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
    url(r'^$', views.home_page, name='index'),
-   url(r'^profile/', views.user_profile, name='profile'),
+   url(r'^accounts/profile/', views.user_profile, name='profile'),
    url(r'^logout/', views.logout, {"next_page": '/'}),
 ]
 if settings.DEBUG:
