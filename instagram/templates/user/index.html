@@ -1,8 +1,15 @@
-{% extends 'user/base.html' %}
-{% block content %}
-<h1>Home Page</h1>
-{% for image in images %}
-<img src="{{image.image.url}}" alt=" image">
+{% extends 'user/base.html' %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div id="addprofile" class="text-center">
+                <h4>Add a profile picture</h4>
+                <input type="submit" action="/accounts/profile/" value="Add Profile Picture">
+            </div>
 
-{% endfor %}
-{% endblock %}
+        </div>
+    </div>
+</div>
+
+{% for image in images %}
+<img src="{{image.image.url}}" alt=" image"> {% endfor %} {% endblock %}

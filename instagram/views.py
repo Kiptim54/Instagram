@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import logout
 from django.contrib.auth.decorators import login_required
 from .models import Photos, Profile
-from .forms import PhotoForm
+from .forms import ProfileForm
 
 def home_page(request):
     title = "Instagram | Home"
@@ -15,12 +15,12 @@ def user_profile(request):
     if request.method=='POST':
         current_user=request.user
         print(current_user)
-        form = PhotoForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            photo=form.save(commit=False)
-            photo.user=current_user
-            photo.save()
+            profile=form.save(commit=False)
+            profile.user=current_user
+            profile.save()
     else:
-        form=PhotoForm()
+        form=ProfileForm()
     title="Instagram | Home "
     return render(request, 'user/profile.html', {"title":title, "form":form})

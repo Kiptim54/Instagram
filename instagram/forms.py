@@ -1,7 +1,7 @@
-from .models import Photos
+from .models import Photos , Profile
 from django import forms
 
-class PhotoForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
-        model=Photos
-        exclude=['user']
+        model=Profile
+        exclude=['user' ]
