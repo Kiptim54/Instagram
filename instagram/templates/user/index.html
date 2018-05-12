@@ -1,7 +1,8 @@
 {% extends 'user/base.html' %} {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <!-- remember to add function for profile picture -->
+        <div class="col-md-6 col-md-offset-3">
             <div id="addprofile" class="text-center">
                 <h4>Add a profile picture</h4>
                 <input type="submit" action="/accounts/profile/" value="Add Profile Picture">
@@ -10,6 +11,19 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
 
-{% for image in images %}
-<img src="{{image.image.url}}" alt=" image"> {% endfor %} {% endblock %}
+            {% if images %}
+            <h1>Start posting your pictures now and following others</h1>
+            {% for image in images %}
+            <img src="{{image.image.url}}" alt=" image"> 
+            {% endfor %} 
+            {% else %}
+            <h1 class="text-center">Welcome! start posting now</h1>
+            {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+</div>

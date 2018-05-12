@@ -1,22 +1,29 @@
-{% extends 'user/base.html' %} {% load bootstrap3 %} {% block content %}
+{% extends 'user/base.html' %} {% block content %}
 <div class="container">
-  <div class="row">
-      <h1>Profile</h1>
-      <hr>
-    <div class="col-md-6 col-md-offset-3">
-      
-      <h3>Photo</h3>
-      {{form.media}}
+    <div class="row">
+        <!-- remember to add function for profile picture -->
+        <div class="col-md-6 col-md-offset-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                            <img src="{{profiles.profile_photo.url}}" class="img-responsive" alt="profile picture">
+                            <h1>{{profiles.bio}}</h1>
+                            
+                    </div>
+                </div>
+            </div>
+            
+            
 
-      <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %} {% bootstrap_form form %}
-        <input type="submit" class="btn btn-success" value="post" s>
-      </form>
-      {% block scripts %}
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      {% bootstrap_javascript %} {% endblock %}
+        </div>
     </div>
-  </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
 
+           
+        </div>
+    </div>
+</div>
 {% endblock %}
