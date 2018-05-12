@@ -16,9 +16,14 @@
         <div class="col-md-6 col-md-offset-3">
 
             {% if images %}
-            <h1>Start posting your pictures now and following others</h1>
             {% for image in images %}
-            <img src="{{image.image.url}}" alt=" image"> 
+            Profile:{{image.profile}}
+            <hr>
+            <img src="{{image.image.url}}" class="img-responsive" alt=" image"> 
+            <hr>
+            Caption:{{image.image_caption}}
+            <hr>
+            <br>
             {% endfor %} 
             {% else %}
             <h1 class="text-center">Welcome! start posting now</h1>

@@ -9,12 +9,14 @@
 {% endblock %}
 
 <!-- form -->
-<form action="{% url 'uploadphotos' %}" method="post" enctype="=multipart/form-data">
-{% csrf_token %}
-{% bootstrap_form form %}
-<input type="submit" class="btn btn-success" value="post">
+<h3>Photo</h3>
+{{form.media}}
 
+<form action="{% url 'uploadphotos' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %} {% bootstrap_form form %}
+  <input type="submit" class="btn btn-success" value="post" s>
 </form>
+{% block scri
 
 {% block scripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
