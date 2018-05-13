@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import logout
 from django.contrib.auth.decorators import login_required
-from .models import Photos, Profile
-from .forms import ProfileForm, PhotoForm
+from .models import Photos, Profile, Comments
+from .forms import ProfileForm, PhotoForm, CommentForm
 from django.core.exceptions import ValidationError
 
 def home_page(request):
@@ -13,7 +13,32 @@ def home_page(request):
     '''
     title = "Instagram | Home"
     images=Photos.display_images()
-    return render(request, 'user/index.html', {"title": title, "images":images})
+    comments=Comments.display_comments()
+    return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments})
+
+def add_comment(request, photo_id):
+    '''
+    function for adding comment to image
+    '''
+    title="add comments"
+    form=None
+    try: 
+        photo_id=Photos.objects.filter(photo_id)
+        if request.method=='POST':
+            current_user=request.user
+            form=CommentForm(request.POST, request.FILES)
+            if form.is_valid():
+                comment=form.save(commit=False)
+                comment.image=photo_id
+                comment.save()
+        else:
+            form=CommentForm()
+
+    except ValueError:
+        Http404
+    
+        return render(request, 'user/addcomment.html', {'title':title, 'form':form, 'photo':photo_id})
+        
 
 
 @login_required
@@ -77,6 +102,7 @@ def user_profile(request):
     current_user=request.user
     title=f'Instagram | {current_user.username}'
     profile = Profile.objects.get(user_id=current_user.id)
+    user_id=current_user.id
     images = Photos.objects.all().filter(profile_id=user_id)
     print(images)
 

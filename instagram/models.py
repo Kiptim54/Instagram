@@ -33,7 +33,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-    
+   
     
 
 
@@ -43,9 +43,10 @@ class Photos(models.Model):
     image_name=models.CharField(blank=True, max_length=50)
     image_caption=models.CharField(blank=True,max_length=200)
     profile=models.ForeignKey(Profile, related_name="user_profile")
+    posted= models.DateTimeField(auto_now_add=True, null=True)
     # user=models.ForeignKey(User, on_delete=models.CASCADE)
     # likes=models.IntegerField(blank=True)
-    # comment=models.TextField(max_length=200, blank=True)
+    
 
     def __str__(self):
         return self.image_name
@@ -64,4 +65,14 @@ class Photos(models.Model):
 
 class Comments(models.Model):
     comment=models.TextField(blank=True, max_length=300)
-    image=modes.ForeignKey(Photos)
+    image=models.ForeignKey(Photos) 
+    posted = models.DateTimeField(auto_now_add=True, null=True)
+
+    def save_comment(self):
+        self.save()
+
+    @classmethod
+    def display_comments(cls):
+        comments=cls.objects.all()
+        return comments
+
