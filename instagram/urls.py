@@ -11,6 +11,8 @@ urlpatterns = [
    url(r'^upload/', views.user_upload_images, name="uploadphotos" ),
    url(r'^accounts/profile/', views.user_profile, name="userprofile"),
    url(r'^photo/(?P<id>\d+)/comment', views.add_comment, name='addcomment'),
+   url(r'^search/', views.search_username, name='search_username')
 ]
+
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -11,9 +11,11 @@ def home_page(request):
     '''
     functions for the instagram landing page
     '''
+    current_user=request.user.id
     title = "Instagram | Home"
     images=Photos.display_images()
     comments=Comments.objects.all()
+    print(comments)
     return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments})
 
 def add_comment(request, id):
@@ -121,3 +123,18 @@ def user_profile(request):
     
     
     
+def search_username(request):
+    '''
+    function for users to search for other 
+    users on the site
+    '''
+    if 'username' in request.GET and request.GET['username']:
+        search_term=request.GET.get('username')
+        searched_profile=Profile.find_username(search_term)
+        message=f'{search_term}'
+
+        return render(request, 'user/profiles.html', {"message":message, "profiles":searched_profile})
+
+    else:
+        message='No one found.Sorry'
+        return render(request, 'user/profiles.html', {"message":message})
