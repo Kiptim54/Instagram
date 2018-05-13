@@ -23,12 +23,14 @@
             <hr>
             Caption:{{image.image_caption}}
             <hr>
+            <p><a href="{% url 'addcomment' id=image.pk %}">Comment... </a> </p>
             <br>
             {% endfor %} 
             {% else %}
             <h1 class="text-center">Welcome! start posting now</h1>
             {% endif %}
-            {% endblock %}
         </div>
     </div>
 </div>
+{% endblock %}
+  

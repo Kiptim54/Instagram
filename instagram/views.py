@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import logout
@@ -16,28 +16,30 @@ def home_page(request):
     comments=Comments.display_comments()
     return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments})
 
-def add_comment(request, photo_id):
+def add_comment(request, id):
     '''
     function for adding comment to image
     '''
     title="add comments"
-    form=None
+    
     try: 
-        photo_id=Photos.objects.filter(photo_id)
+        photo=get_object_or_404(Photos, id=id)
+        print(photo)
         if request.method=='POST':
             current_user=request.user
             form=CommentForm(request.POST, request.FILES)
             if form.is_valid():
                 comment=form.save(commit=False)
-                comment.image=photo_id
+                comment.image=photo
                 comment.save()
+            return redirect('/')
         else:
             form=CommentForm()
 
     except ValueError:
         Http404
     
-        return render(request, 'user/addcomment.html', {'title':title, 'form':form, 'photo':photo_id})
+    return render(request, 'user/addcomment.html', {'title':title, 'form':form, "id":id })
         
 
 
