@@ -82,6 +82,7 @@ def user_upload_images(request):
                     photo=form.save(commit=False)
                     user=Profile.objects.get(user=current_user)
                     photo.profile=user
+                    photo.user=current_user
                     photo.save()
                     return redirect('/')
                     
@@ -104,13 +105,19 @@ def user_profile(request):
     '''
     function to display the user profile
     '''
-    current_user=request.user
-    title=f'Instagram | {current_user.username}'
-    profile = Profile.objects.get(user_id=current_user.id)
-    user_id=current_user.id
-    images = Photos.objects.all().filter(profile_id=user_id)
-    print(images)
+    try:
+        current_user=request.user
+        current_user.id=request.user.id
+        title=f'Instagram | {current_user.username}'
+        profile = Profile.objects.get(user_id=current_user.id)
+        images = Photos.objects.all().filter(profile__user=current_user.id)
+        print(images)
+        return render(request, 'user/profile.html', {"title":title,"profiles":profile, "images":images})
+
+    except:
+        return redirect('profile')
+    
 
     
     
-    return render(request, 'user/profile.html', {"title":title,"profiles":profile, "images":images})
+    

@@ -40,7 +40,7 @@ class Photos(models.Model):
     image_caption=models.CharField(blank=True,max_length=200)
     profile=models.ForeignKey(Profile, related_name="user_profile")
     posted= models.DateTimeField(auto_now_add=True, null=True)
-    # user=models.ForeignKey(User, on_delete=models.CASCADE)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
     # likes=models.IntegerField(blank=True)
     
 
