@@ -16,7 +16,8 @@
 
       <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %} {% bootstrap_form form %}
-        <input type="submit" class="btn btn-success" value="post" s>
+        <input type="submit" class="btn btn-success" value="post" >
+        <input type="hidden" name="next" value="{{next}}">
       </form>
      
     </div>

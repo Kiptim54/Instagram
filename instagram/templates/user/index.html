@@ -23,6 +23,12 @@
             <hr>
             Caption:{{image.image_caption}}
             <hr>
+            {% for comment in comments %}
+            {{comment.user}}:{{comment.comment}}
+            <br>~{{comment.posted}}
+            <br>
+            {% endfor %}
+            <hr>
             <p><a href="{% url 'addcomment' id=image.pk %}">Comment... </a> </p>
             <br>
             {% endfor %} 

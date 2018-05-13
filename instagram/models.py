@@ -33,10 +33,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-   
-    
-
-
 
 class Photos(models.Model):
     image=models.ImageField(upload_to='articles/')
@@ -63,10 +59,15 @@ class Photos(models.Model):
         images=cls.objects.all()
         return images
 
+  
 class Comments(models.Model):
-    comment=models.TextField(blank=True, max_length=300)
-    image=models.ForeignKey(Photos) 
+    comment=models.TextField(blank=True, max_length=300) 
     posted = models.DateTimeField(auto_now_add=True, null=True)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    image=models.ForeignKey(Photos)
+
+    def __str__(self):
+        return self.comment
 
     def save_comment(self):
         self.save()
@@ -75,4 +76,11 @@ class Comments(models.Model):
     def display_comments(cls):
         comments=cls.objects.all()
         return comments
+
+    @classmethod
+    def comment_byphoto(cls, id):
+        comment=cls.objects.filter(image=id)
+        return comment
+
+
 

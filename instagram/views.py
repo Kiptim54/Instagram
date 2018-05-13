@@ -13,7 +13,7 @@ def home_page(request):
     '''
     title = "Instagram | Home"
     images=Photos.display_images()
-    comments=Comments.display_comments()
+    comments=Comments.objects.all()
     return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments})
 
 def add_comment(request, id):
@@ -31,6 +31,7 @@ def add_comment(request, id):
             if form.is_valid():
                 comment=form.save(commit=False)
                 comment.image=photo
+                comment.user=current_user
                 comment.save()
             return redirect('/')
         else:
@@ -59,6 +60,7 @@ def user_profile_edit(request):
             if Profile.objects.filter(user_id=current_user.id).exists():
                 Profile.objects.filter(user_id=current_user.id).delete()
             profile.save()
+            return redirect('userprofile')
 
     else:
         form=ProfileForm()
@@ -81,6 +83,7 @@ def user_upload_images(request):
                     user=Profile.objects.get(user=current_user)
                     photo.profile=user
                     photo.save()
+                    return redirect('/')
                     
         else:
             form =PhotoForm()
