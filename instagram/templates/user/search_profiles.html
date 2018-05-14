@@ -4,7 +4,7 @@
 
   <div class="row">
     {% if profiles%}
-      <h2>Found {{ profiles|length }} of searched term {{message}}</h2>
+      <h2 class="centered">Found {{ profiles|length }}  {{message}} profiles</h2>
     {% else %}
       <h2> Found 0 profiles for the search term {{message}}</h2>
     {% endif %}
@@ -15,10 +15,10 @@
 
   {% if profiles %}
     {% for profile in profiles %}
-      <div class="col-sm-6 col-md-3">
-          <h1>{{profile.name}}</h1>
-            <img src="{{profile.profile_photo.url}}" alt="">
-      </div>
+      <div class="col-md-3">
+            <img src="{{profile.profile_photo.url}}" alt="" class="img-responsive" style="height:40%; border-radius: 99%">
+            <h1>{{profile.name}}</h1>
+          </div>
     {% endfor %}
   {% endif %}
   </div>

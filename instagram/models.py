@@ -42,7 +42,8 @@ class Photos(models.Model):
     profile=models.ForeignKey(Profile, related_name="user_profile")
     posted= models.DateTimeField(auto_now_add=True, null=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE)
-    # likes=models.IntegerField(blank=True)
+    posted = models.DateTimeField(auto_now_add=True, null=True)
+    # likes=models.ManyToManyField(settings.AUTH_USER_MODEL,blank=True)
     
 
     def __str__(self):
@@ -57,7 +58,7 @@ class Photos(models.Model):
 
     @classmethod
     def display_images(cls):
-        images=cls.objects.all()
+        images=cls.objects.all() 
         return images
 
   
