@@ -23,9 +23,11 @@
                 </div>
                 
                 <span style="font-size:200%; padding:3%;">
-                <ion-icon name="heart-empty"></ion-icon> <a href="{% url 'addcomment' id=image.pk %}"><ion-icon name="chatbubbles"></ion-icon> </a>
+                    {{likes.likes}} 
+                <ion-icon name="heart-empty"></ion-icon> 
+                <a href="{% url 'addcomment' id=image.pk %}"><ion-icon name="chatbubbles"></ion-icon> </a>
             </span>
-                    <a href="{% url 'viewimage' id=image.pk %}">View Comments</a>
+                    <!-- <a href="{% url 'viewimage' id=image.pk %}">View Comments</a> -->
                 </p>
             </div>
            
@@ -35,5 +37,6 @@
         </div>
     </div>
 </div>
+
 
 {% endblock %}

@@ -1,30 +1,35 @@
 {% extends 'user/base.html' %} {% block content %}
+
+<!-- remember to add function for profile picture -->
+
 <div class="container">
     <div class="row">
-        <!-- remember to add function for profile picture -->
-        <div class="col-md-6 col-md-offset-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img style="width:40%; border-radius:99%;" src="{{profiles.profile_photo.url}}" class="img-responsive" alt="profile picture">
-                        <h2>{{profiles.name}}</h2>
-                        <h4>{{profiles.bio}}</h4>
+        <div class="col-md-3 col-md-offset-1 centered">
+            <img style="width:40%; border-radius:99%;" src="{{profiles.profile_photo.url}}" class="img-responsive" alt="profile picture">
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <h2>{{profiles.name}}</h2>
+            <h4>{{profiles.bio}}</h4>
 
-
-                    </div>
-                </div>
-            </div>
+            <button>
+                <a href=""> Edit Profile</a>
+            </button>
 
         </div>
+
     </div>
+
 </div>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            {% if images %} {% for image in images %}
-            <img src="{{image.image.url }}" alt="here is a photo"> {% endfor %} {% endif %}
+        {% if images %} {% for image in images %}
+        <div class="col-md-3">
+
+            <img src="{{image.image.url }}" alt="here is a photo" style="height:50%;" class="img-responsive">
 
         </div>
+        {% endfor %} {% endif %}
     </div>
 </div>
 {% endblock %}

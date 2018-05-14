@@ -87,5 +87,13 @@ class Likes(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     likes=models.IntegerField(default=0, null=True)
 
+    def __str__(self):
+        return self.user.username
+
+    @classmethod
+    def get_likes(cls):
+        likes=cls.objects.all()
+        return likes
+
 
 

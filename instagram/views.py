@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import logout
 from django.contrib.auth.decorators import login_required
-from .models import Photos, Profile, Comments
+from .models import Photos, Profile, Comments, Likes
 from .forms import ProfileForm, PhotoForm, CommentForm
 from django.core.exceptions import ValidationError
 
@@ -13,10 +13,12 @@ def home_page(request):
     '''
     current_user=request.user.id
     title = "Instagram | Home"
+    likes=Likes.get_likes()
+    print(likes)
     images=Photos.display_images()
     comments=Comments.objects.all()
-    print(comments)
-    return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments})
+    
+    return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments, "likes":likes})
 
 def view_image(request, id):
     title="images_details"
@@ -136,8 +138,8 @@ def search_username(request):
         searched_profile=Profile.find_username(search_term)
         message=f'{search_term}'
 
-        return render(request, 'user/profiles.html', {"message":message, "profiles":searched_profile})
+        return render(request, 'user/search_profiles.html', {"message":message, "profiles":searched_profile})
 
     else:
         message='No one found.Sorry'
-        return render(request, 'user/profiles.html', {"message":message})
+        return render(request, 'user/search_profiles.html', {"message":message})
