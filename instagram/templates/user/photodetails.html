@@ -1,0 +1,48 @@
+{% extends 'user/base.html' %} {% block content %}
+<div class="container">
+    <div class="row">
+        <!-- remember to add function for profile picture -->
+        <div class="col-md-8 col-md-offset-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+
+
+
+                        <div class="card" style="width: 70rem;">
+                            <img style="width:10%; height:10% ; border-radius:97%;" src=" {{images.profile.profile_photo.url}}" class="img-responsive"
+                                alt=" image">
+                            <b>{{images.profile.name}}</b>
+                            <img class="card-img-top" src="{{images.image.url}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4>{{images.image_caption}}</h4>
+                                <span style="font-size:200%; padding:3%;">
+                                    <ion-icon name="heart-empty"></ion-icon>
+                                    <a href="{% url 'addcomment' id=images.pk %}">
+                                        <ion-icon name="chatbubbles"></ion-icon>
+                                    </a>
+                                </span>
+                                <p class="card-text">
+
+
+                                    <hr>
+                                    <i>
+                                        <h5>Comments</h5>
+                                    </i>
+                                    {% for comment in comments %}
+                                    <p> {{comment.image.profile.name}}:{{comment.comment }}</p>
+                                    <br> {% endfor %}</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+{% endblock%}

@@ -1,44 +1,39 @@
-{% extends 'user/base.html' %} {% block content %}
+{% extends 'user/base.html' %} 
+{% load bootstrap3 %}
+{% block content %}
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="static/css/index.css">
+{% endblock %}
+
 <div class="container">
     <div class="row">
-        <!-- remember to add function for profile picture -->
         <div class="col-md-6 col-md-offset-3">
-            <div id="addprofile" class="text-center">
-                <h4>Add a profile picture</h4>
-                <form action="/accounts/profile/edit">
-                <input type="submit" action="/accounts/profile/" value="Add Profile Picture">
-            </form>
+
+            {% if images %} {% for image in images %}
+            <div class="card" style="max-width: 70rem;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <span> <img style="width:5%; height:10% ; border-radius:97%;" src=" {{image.profile.profile_photo.url}}" class="img-responsive" alt=" image"> {{image.profile}}</span></h5>
+                    <hr>
+                    <div class="card-body">
+                        <a href="{% url 'viewimage' id=image.pk %}"> <img src=" {{image.image.url}}" class="img-responsive" alt=" image"></a>
+                    </div>
+                    <h5>{{image.image_caption}}</h5>
+                </div>
+                
+                <span style="font-size:200%; padding:3%;">
+                <ion-icon name="heart-empty"></ion-icon> <a href="{% url 'addcomment' id=image.pk %}"><ion-icon name="chatbubbles"></ion-icon> </a>
+            </span>
+                    <a href="{% url 'viewimage' id=image.pk %}">View Comments</a>
+                </p>
             </div>
-
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-
-            {% if images %}
-            {% for image in images %}
-            Profile:{{image.profile}}
-            <hr>
-            <img src="{{image.image.url}}" class="img-responsive" alt=" image"> 
-            <hr>
-            Caption:{{image.image_caption}}
-            <hr>
-            {% for comment in comments %}
-            {{comment.user}}:{{comment.comment}}
-            <br>~{{comment.posted}}
-            <br>
-            {% endfor %}
-            <hr>
-            <p><a href="{% url 'addcomment' id=image.pk %}">Comment... </a> </p>
-            <br>
-            {% endfor %} 
-            {% else %}
+           
+            {% endfor %} {% else %}
             <h1 class="text-center">Welcome! start posting now</h1>
             {% endif %}
         </div>
     </div>
 </div>
+
 {% endblock %}
-  

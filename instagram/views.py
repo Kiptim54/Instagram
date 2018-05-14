@@ -18,6 +18,15 @@ def home_page(request):
     print(comments)
     return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments})
 
+def view_image(request, id):
+    title="images_details"
+    photo=get_object_or_404(Photos, id=id)
+    id=photo
+    print(photo)
+    comments=Comments.objects.all().filter(image=id)
+    return render(request, 'user/photodetails.html', {"title": title, "images":photo, "comments":comments, "id":id})
+
+
 def add_comment(request, id):
     '''
     function for adding comment to image
@@ -95,13 +104,7 @@ def user_upload_images(request):
     else:
         return redirect(user_profile_edit)
         
-        
-    
-        
-
-   
-
-    
+            
 
 def user_profile(request):
     '''

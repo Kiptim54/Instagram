@@ -5,38 +5,39 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/ionicons@4.0.0/dist/ionicons.js"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" style=" background-color: #FFFFFF;">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
+          
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Instagram</a>
+           <a href="/"><img src="/static/photos/LogoMakr_7TMhUf.png" style='width:5%; height:2%; padding-top:1%'alt="logo"></a>
         </div>
     
         <!-- Collect the nav links, forms, and other content for toggling -->
        
           <form class="navbar-form navbar-left"role="search" action="{% url 'search_username' %}">
             <div class="form-group navbar-right">
-              <input type="text" class="form-control" placeholder="Search" name="username">
+              <input style="background:#FAFAFA;"type="text" class="form-control" placeholder="Search" name="username">
             </div>
-            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-          </form>
+            <!-- <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button> -->
+          </form> 
           {% if user.is_authenticated %}
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="accounts/profile/">{{user.username}}</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false">Account <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false"><span><ion-icon style="font-size:200%;"name="contact"></ion-icon><class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="/upload">Upload Photo</a></li>
-                <li><a href="/accounts/profile/">Profile</a></li>
+                <li><a href="/accounts/profile/">{{user.username}}</a></li>
                 <li><a href="/accounts/password/change">Change Password</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/logout">Logout</a></li>
@@ -47,6 +48,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li> <a href="/accounts/login">Login</a> </li>
               </ul>
+             </div>
                 
            
             {% endif %}

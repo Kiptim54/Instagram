@@ -83,5 +83,9 @@ class Comments(models.Model):
         comment=cls.objects.filter(image=id)
         return comment
 
+class Likes(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    likes=models.IntegerField(default=0, null=True)
+
 
 

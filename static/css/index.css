@@ -1,0 +1,9 @@
+.card{
+    margin-bottom:4%;
+    border-radius:.5%;
+    border:.5%, black, solid;
+    box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color];
+}
+bodY{
+    background:#FAFAFA;
+}

@@ -6,14 +6,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                            <img src="{{profiles.profile_photo.url}}" class="img-responsive" alt="profile picture">
-                            <h1>{{profiles.bio}}</h1>
-                            
+                        <img style="width:40%; border-radius:99%;" src="{{profiles.profile_photo.url}}" class="img-responsive" alt="profile picture">
+                        <h2>{{profiles.name}}</h2>
+                        <h4>{{profiles.bio}}</h4>
+
+
                     </div>
                 </div>
             </div>
-            
-            
 
         </div>
     </div>
@@ -21,13 +21,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            {% if images %}
-            {% for image in images %}
-            <img src="{{image.image.url }}" alt="here is a photo">
-            
-            {% endfor %}
-            {% endif %}
-           
+            {% if images %} {% for image in images %}
+            <img src="{{image.image.url }}" alt="here is a photo"> {% endfor %} {% endif %}
+
         </div>
     </div>
 </div>
