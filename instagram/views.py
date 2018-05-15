@@ -7,19 +7,41 @@ from .models import Photos, Profile, Comments, Likes
 from .forms import ProfileForm, PhotoForm, CommentForm
 from django.core.exceptions import ValidationError
 
+@login_required
 def home_page(request):
     '''
     functions for the instagram landing page
     '''
     current_user=request.user.id
     title = "Instagram | Home"
-    likes=Likes.get_likes()
-    print(likes)
-    images=Photos.display_images()
+    images = Photos.objects.all().filter(profile__user=current_user)
     comments=Comments.objects.all()
     
-    return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments, "likes":likes})
+    return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments})
 
+@login_required
+def like_post(request):
+    current_user=request.user
+    photo=get_object_or_404(Photos, id=5)
+    photo.likes=current_user
+    photo.save()
+    print("hello")
+    return redirect(request, '/')
+    
+    
+
+def explore_page(request):
+    '''
+    functions for the instagra explore page to see people you do not know
+    '''
+    current_user=request.user.id
+    title = "Instagram | Explore"
+    images = Photos.objects.all().exclude(profile__user=current_user)
+    comments=Comments.objects.all()
+    
+    return render(request, 'user/explore.html', {"title": title, "images":images, "comments":comments})
+
+@login_required
 def view_image(request, id):
     title="images_details"
     photo=get_object_or_404(Photos, id=id)
@@ -28,7 +50,7 @@ def view_image(request, id):
     comments=Comments.objects.all().filter(image=id)
     return render(request, 'user/photodetails.html', {"title": title, "images":photo, "comments":comments, "id":id})
 
-
+@login_required
 def add_comment(request, id):
     '''
     function for adding comment to image
@@ -80,7 +102,7 @@ def user_profile_edit(request):
     return render(request, 'user/profile_edit.html', {"title":title, "form":form})
 
     
-    
+@login_required  
 def user_upload_images(request):
     '''
     function for the form uploading images to 
@@ -107,7 +129,7 @@ def user_upload_images(request):
         return redirect(user_profile_edit)
         
             
-
+@login_required
 def user_profile(request):
     '''
     function to display the user profile
@@ -127,7 +149,7 @@ def user_profile(request):
 
     
     
-    
+@login_required   
 def search_username(request):
     '''
     function for users to search for other 

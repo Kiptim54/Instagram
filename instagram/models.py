@@ -8,8 +8,9 @@ class Profile(models.Model):
     bio=models.CharField(max_length=100)
     user=models.ForeignKey(User, related_name='user_name', on_delete=models.CASCADE )
     name=models.CharField(max_length=50)
-    # follows=models.ManyToManyField()
-    # username=models.CharField(max_length=50)
+    followers=models.ManyToManyField(User,related_name='profile_followers', blank=True)
+    following=models.ManyToManyField(User,related_name='profile_following', blank=True)
+    
     
     def save_profile(self):
         self.save()
@@ -43,7 +44,8 @@ class Photos(models.Model):
     posted= models.DateTimeField(auto_now_add=True, null=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     posted = models.DateTimeField(auto_now_add=True, null=True)
-    # likes=models.ManyToManyField(settings.AUTH_USER_MODEL,blank=True)
+    likes=models.ManyToManyField(User, related_name='Photos_likes', blank=True)
+    
     
 
     def __str__(self):
@@ -60,6 +62,10 @@ class Photos(models.Model):
     def display_images(cls):
         images=cls.objects.all() 
         return images
+    @classmethod
+    def filter_imagebyprofile(cls):
+        cls.objects.all().filter()
+
 
   
 class Comments(models.Model):

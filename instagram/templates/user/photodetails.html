@@ -30,7 +30,7 @@
                                         <h5>Comments</h5>
                                     </i>
                                     {% for comment in comments %}
-                                    <p> {{comment.image.profile.name}}:{{comment.comment }}</p>
+                                    <p> {{comment.user}}:{{comment.comment }}</p>
                                     <br> {% endfor %}</p>
                             </div>
                         </div>

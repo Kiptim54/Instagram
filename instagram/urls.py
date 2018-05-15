@@ -12,7 +12,9 @@ urlpatterns = [
    url(r'^accounts/profile/', views.user_profile, name="userprofile"),
    url(r'^photo/(?P<id>\d+)/comment', views.add_comment, name='addcomment'),
    url(r'^search/', views.search_username, name='search_username'),
-   url(r'^image/(?P<id>\d+)', views.view_image, name='viewimage'),
+   url(r'^image/(?P<id>\d+)$', views.view_image, name='viewimage'),
+   url(r'^explore/', views.explore_page, name="explore"),
+   url(r'^image/5/likes', views.like_post, name="like_photo"),
 ]
 
 if settings.DEBUG:
