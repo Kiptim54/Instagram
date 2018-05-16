@@ -14,7 +14,7 @@ urlpatterns = [
    url(r'^search/', views.search_username, name='search_username'),
    url(r'^image/(?P<id>\d+)$', views.view_image, name='viewimage'),
    url(r'^explore/', views.explore_page, name="explore"),
-   url(r'^image/5/likes', views.like_post, name="like_photo"),
+   url(r'^image/(?P<id>\d+)/likes', views.like_post, name="like_image"),
 ]
 
 if settings.DEBUG:

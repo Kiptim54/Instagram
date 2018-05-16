@@ -20,13 +20,18 @@ def home_page(request):
     return render(request, 'user/index.html', {"title": title, "images":images, "comments":comments})
 
 @login_required
-def like_post(request):
+def like_post(request, id):
     current_user=request.user
-    photo=get_object_or_404(Photos, id=5)
-    photo.likes=current_user
-    photo.save()
-    print("hello")
-    return redirect(request, '/')
+    photo=get_object_or_404(Photos, id=id)
+    if current_user in photo.likes.all():
+        photo.likes.add(current_user)
+        photo.likes.remove(current_user)
+        print(current_user)
+        print("hello")
+    else:
+        photo.likes.add(current_user)
+        return redirect('/')
+    return redirect('/')
     
     
 

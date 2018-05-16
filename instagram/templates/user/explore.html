@@ -20,11 +20,11 @@
                     <div class="card-body">
                         <a href="{% url 'viewimage' id=image.pk %}"> <img src=" {{image.image.url}}" class="img-responsive" alt=" image"></a>
                     </div>
-                    <span style="  margin-bottom:4%;"> <h5>{{image.profile.user.username}}</h5>{{image.image_caption}}</h5></span>
+                    <span style="  margin-bottom:4%;"><a href="{% url 'userprofile' %}"> <h5>{{image.profile.user.username}}</a></h5>{{image.image_caption}}</h5></span>
                 </div>
                 
                 <span style="font-size:200%; padding:3%;">
-                    {{likes.likes.count}} 
+                    {{image.likes.count}} 
                 <ion-icon name="heart-empty"></ion-icon> 
                 <a href="{% url 'addcomment' id=image.pk %}"><ion-icon name="chatbubbles"></ion-icon> </a>
             </span>

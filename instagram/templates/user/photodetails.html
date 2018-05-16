@@ -17,7 +17,7 @@
                             <div class="card-body">
                                 <h4>{{images.image_caption}}</h4>
                                 <span style="font-size:200%; padding:3%;">
-                                    <ion-icon name="heart-empty"></ion-icon>
+                                    {{image.likes.count}} <a href="{% url 'like_image' id=images.pk %}"> <ion-icon name="heart-empty"></ion-icon></a>
                                     <a href="{% url 'addcomment' id=images.pk %}">
                                         <ion-icon name="chatbubbles"></ion-icon>
                                     </a>

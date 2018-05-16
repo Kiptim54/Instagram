@@ -14,7 +14,8 @@
             <div class="card" style="max-width: 90rem;">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <span> <img style="width:50px; height:50px ; border-radius:50%;" src=" {{image.profile.profile_photo.url}}" class="img-responsive" alt=" image"> {{image.profile.user.username}}</span></h5>
+                        <a href="{% url 'userprofile' %}">
+                        <span> <img style="width:50px; height:50px ; border-radius:50%;" src=" {{image.profile.profile_photo.url}}" class="img-responsive" alt=" image"> {{image.profile.user.username}}</span></a></h5>
                     <hr>
                     <div class="card-body">
                         <a href="{% url 'viewimage' id=image.pk %}"> <img src=" {{image.image.url}}" class="img-responsive" alt=" image"></a>
@@ -23,12 +24,18 @@
                 </div>
                  
                 <span style="font-size:200%; padding:3%;">
-                <ion-icon name="heart-empty"></ion-icon> {{image.likes.count}}
+                    {{image.likes.count}}
+                    <ion-icon name="heart-empty"></ion-icon> 
                 <a href="{% url 'addcomment' id=image.pk %}"><ion-icon name="chatbubbles"></ion-icon> </a>
             </span>
-                    <a href="{% url 'viewimage' id=image.pk %}">View Comments</a>
+             <p style="margin-left:1%;">
+                    <a href="{% url 'viewimage' id=image.pk %}">View details</a>
+                    
                 </p>
             </div>
+            <div class="tooltip">Hover over me
+                <span class="tooltiptext">Tooltip text</span>
+              </div>
            
             {% endfor %} {% else %}
             <h1 class="text-center">Welcome! start posting now</h1>
